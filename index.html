@@ -83,6 +83,42 @@
             player.volume(1);
         });
     </script>
+<button onclick="toggleFullScreen()">Fullscreen</button>
+
+<script>
+    function toggleFullScreen() {
+        var elem = document.getElementById("liveStream");
+
+        if (document.fullscreenElement || 
+            document.mozFullScreenElement || 
+            document.webkitFullscreenElement || 
+            document.msFullscreenElement) {
+            // Exit fullscreen if already in fullscreen mode
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            } else if (document.msExitFullscreen) {
+                document.msExitFullscreen();
+            }
+        } else {
+            // Enter fullscreen mode
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.mozRequestFullScreen) { // Firefox
+                elem.mozRequestFullScreen();
+            } else if (elem.webkitRequestFullscreen) { // Chrome, Safari, Brave, and Opera
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) { // IE/Edge
+                elem.msRequestFullscreen();
+            } else if (elem.webkitEnterFullscreen) { // iOS Safari
+                elem.webkitEnterFullscreen();
+            }
+        }
+    }
+</script>
 
 </body>
 </html>
