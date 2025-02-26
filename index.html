@@ -103,6 +103,7 @@
             gainNode.gain.value = volume; // Boost volume up to 500%
         }
     </script>
+    </script>
     document.addEventListener("click", function() {
     if (audioContext.state === "suspended") {
         audioContext.resume().then(() => {
@@ -112,6 +113,7 @@
 });
 player.muted(false);
 player.volume(1);
-
+    
+     </script>
 </body>
 </html>
