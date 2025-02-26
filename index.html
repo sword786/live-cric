@@ -3,13 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live cricket Streaming</title>
+    <title>Live Cricket Streaming</title>
 
     <!-- Video.js CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.14.3/video-js.min.css" rel="stylesheet">
-
-    <!-- Video.js HTTP Source Selector Plugin CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/videojs-http-source-selector/dist/videojs-http-source-selector.css">
 
     <style>
         body {
@@ -35,7 +32,7 @@
     </style>
 </head>
 <body>
-    <h1>live cricket link</h1>
+    <h1>Live Cricket Link</h1>
 
     <!-- Telegram Banner -->
     <div class="tg-banner" onclick="window.location.href='https://t.me/+nh1nYS6yEzoxMWI1';">
@@ -49,16 +46,11 @@
     <video id="liveStream" class="video-js vjs-default-skin" controls autoplay playsinline width="800" height="450">
         <source src="https://cdnt20.t20hd.cfd/live/m3-480p.m3u8" type="application/x-mpegURL">
     </video>
+    <br>
+    <button onclick="toggleFullScreen()">Fullscreen</button>
 
     <!-- Video.js Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.14.3/video.min.js"></script>
-
-    <!-- Video.js HLS Plugin (for streaming support) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.15.0/videojs-contrib-hls.min.js"></script>
-
-    <!-- Video.js HTTP Source Selector Plugin -->
-    <script src="https://cdn.jsdelivr.net/npm/videojs-http-source-selector"></script>
-
     <script>
         var player = videojs('liveStream', {
             autoplay: true,
@@ -71,18 +63,18 @@
             }
         });
 
-            
-            // Ensure sound is on
-            player.volume(1); // Set full volume
-            player.muted(false); // Unmute explicitly
-        });
-
-        // Try unmuting after user interaction (for browsers that block autoplay sound)
-        document.addEventListener("click", function() {
-            player.muted(false);
-            player.volume(1);
-        });
+        function toggleFullScreen() {
+            var elem = document.getElementById("liveStream");
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.mozRequestFullScreen) { // Firefox
+                elem.mozRequestFullScreen();
+            } else if (elem.webkitRequestFullscreen) { // Chrome, Safari, and Opera
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) { // IE/Edge
+                elem.msRequestFullscreen();
+            }
+        }
     </script>
-
 </body>
 </html>
