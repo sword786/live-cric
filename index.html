@@ -70,7 +70,7 @@
         var audioContext = new (window.AudioContext || window.webkitAudioContext)();
         var source = audioContext.createMediaElementSource(player.tech().el());
         var gainNode = audioContext.createGain();
-        gainNode.gain.value = 5; // Set default volume to 500%
+        gainNode.gain.value = 10; // Set default volume to 500%
         source.connect(gainNode);
         gainNode.connect(audioContext.destination);
 
