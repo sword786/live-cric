@@ -67,14 +67,24 @@
         });
 
         // Web Audio API for Volume Boost
-        var audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        var source = audioContext.createMediaElementSource(player.tech().el());
-        var gainNode = audioContext.createGain();
-        source.connect(gainNode);
-        gainNode.connect(audioContext.destination);
+        var audioContext;
+        var gainNode;
+        var source;
+
+        function initializeAudio() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                source = audioContext.createMediaElementSource(player.tech().el());
+                gainNode = audioContext.createGain();
+                source.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                console.log("Audio initialized");
+            }
+        }
 
         // Ensure audio plays on user interaction
         document.addEventListener("click", function() {
+            initializeAudio();
             if (audioContext.state === "suspended") {
                 audioContext.resume().then(() => {
                     console.log("Audio Context Resumed!");
@@ -110,6 +120,9 @@
         }
 
         function setVolume(volume) {
+            if (!gainNode) {
+                initializeAudio();
+            }
             gainNode.gain.value = parseFloat(volume); // Boost volume up to 500%
             console.log("Volume set to:", volume);
         }
